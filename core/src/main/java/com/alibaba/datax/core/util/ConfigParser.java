@@ -25,6 +25,7 @@ public final class ConfigParser {
     public static Configuration parse(final String jobPath) {
         Configuration configuration = ConfigParser.parseJobConfig(jobPath);
 
+        CoreConstant.DATAX_CONF_PATH = "D:\\project\\mine\\DataX\\core\\src\\main\\conf\\core.json";
         configuration.merge(
                 ConfigParser.parseCoreConfig(CoreConstant.DATAX_CONF_PATH),
                 false);
@@ -120,6 +121,7 @@ public final class ConfigParser {
 
         Set<String> replicaCheckPluginSet = new HashSet<String>();
         int complete = 0;
+        CoreConstant.DATAX_PLUGIN_READER_HOME = "D:\\project\\mine\\DataX\\target\\datax\\datax\\plugin\\reader";
         for (final String each : ConfigParser
                 .getDirAsList(CoreConstant.DATAX_PLUGIN_READER_HOME)) {
             Configuration eachReaderConfig = ConfigParser.parseOnePluginConfig(each, "reader", replicaCheckPluginSet, wantPluginNames);
@@ -128,7 +130,7 @@ public final class ConfigParser {
                 complete += 1;
             }
         }
-
+        CoreConstant.DATAX_PLUGIN_WRITER_HOME = "D:\\project\\mine\\DataX\\target\\datax\\datax\\plugin\\writer";
         for (final String each : ConfigParser
                 .getDirAsList(CoreConstant.DATAX_PLUGIN_WRITER_HOME)) {
             Configuration eachWriterConfig = ConfigParser.parseOnePluginConfig(each, "writer", replicaCheckPluginSet, wantPluginNames);
